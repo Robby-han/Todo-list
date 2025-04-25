@@ -13,55 +13,54 @@
 }
 
 .background-images {
-  position: absolute;
+  position: relative;
 }
 
 .background-images div:nth-child(1) {
-  position: relative;
+  position: absolute;
   top: 4pc;
   left: 10pc;
 }
 
 .background-images div:nth-child(2) {
-  position: relative;
-  bottom: -12pc;
-  left: 12pc;
+  position: absolute;
+  top: 20pc;
+  left: 10pc;
 }
 
 .background-images div:nth-child(3) {
-  position: relative;
-  bottom: 5pc;
-  left: 25pc;
+  position: absolute;
+  top: 12pc;
+  left: 24pc;
 }
 
 .background-images div:nth-child(4) {
-  position: relative;
-  bottom: 26pc;
+  position: absolute;
+  top: 1pc;
   left: 30pc;
 }
 
 .background-images div:nth-child(5) {
-  position: relative;
-  bottom: 33pc;
-  left: 62pc;
+  position: absolute;
+  right: 28pc;
 }
 
 .background-images div:nth-child(6) {
-  position: relative;
-  bottom: 35pc;
-  left: 80pc;
+  position: absolute;
+  top: 4pc;
+  right: 10pc;
 }
 
 .background-images div:nth-child(7) {
-  position: relative;
-  bottom: 34pc;
-  left: 63pc;
+  position: absolute;
+  top: 12pc;
+  right: 24pc;
 }
 
 .background-images div:nth-child(8) {
-  position: relative;
-  bottom: 35pc;
-  left: 78pc;
+  position: absolute;
+  top: 21pc;
+  right: 10pc;
 }
 
 header {
@@ -115,3 +114,42 @@ header .desc a {
   text-decoration: none;
   font-weight: 600;
 }
+
+.to-do-list {
+  background-color: #fef5e8;
+  /* background-color: aqua; */
+  font-family: "playpen";
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.to-do-list .header {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  position: relative;
+}
+
+.to-do-list .left {
+  border-bottom: 2px solid black;
+  width: 49%;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  padding-bottom: 8px;
+}
+
+.to-do-list .right {
+  border-bottom: 2px solid black;
+  width: 49%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.to-do-list .container {
+  display: grid;
+  align-self: flex-start;
+  height: 80vh;
+}
+
