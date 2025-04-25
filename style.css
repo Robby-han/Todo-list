@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "playpen";
+  src: url("/font/Playpen_Sans/PlaypenSans-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: "shantell";
+  src: url("/font/Shantell_Sans/ShantellSans-VariableFont_BNCE\,INFM\,SPAC\,wght.ttf");
+}
+
+.background-images {
+  position: absolute;
+}
+
+.background-images div:nth-child(1) {
+  position: relative;
+  top: 4pc;
+  left: 10pc;
+}
+
+.background-images div:nth-child(2) {
+  position: relative;
+  bottom: -12pc;
+  left: 12pc;
+}
+
+.background-images div:nth-child(3) {
+  position: relative;
+  bottom: 5pc;
+  left: 25pc;
+}
+
+.background-images div:nth-child(4) {
+  position: relative;
+  bottom: 26pc;
+  left: 30pc;
+}
+
+.background-images div:nth-child(5) {
+  position: relative;
+  bottom: 33pc;
+  left: 62pc;
+}
+
+.background-images div:nth-child(6) {
+  position: relative;
+  bottom: 35pc;
+  left: 80pc;
+}
+
+.background-images div:nth-child(7) {
+  position: relative;
+  bottom: 34pc;
+  left: 63pc;
+}
+
+.background-images div:nth-child(8) {
+  position: relative;
+  bottom: 35pc;
+  left: 78pc;
+}
+
+header {
+  background-color: #FFF5E6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+header .title {
+  font-family: "playpen";
+  font-size: 7rem;
+  font-weight: 400;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.button a {
+  font-family: "playpen";
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.button span {
+  content: "";
+  display: block;
+  background-color: black;
+  height: 8px;
+  width: 8px;
+  border-radius: 100px;
+}
+
+
+header .desc {
+  font-family: "shantell";
+  font-size: 1.4rem;
+  margin-top: 15px;
+}
+
+header .desc a {
+  font-family: "playpen";
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+}
