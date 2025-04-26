@@ -41,7 +41,7 @@
 .background-images div:nth-child(3) {
   position: absolute;
   top: 12pc;
-  left: 24pc;
+  left: 20pc;
 }
 
 .background-images div:nth-child(4) {
@@ -64,7 +64,7 @@
 .background-images div:nth-child(7) {
   position: absolute;
   top: 12pc;
-  right: 24pc;
+  right: 20pc;
 }
 
 .background-images div:nth-child(8) {
@@ -74,6 +74,7 @@
 }
 
 header {
+  /* margin-top: 100px; */
   background-color: #fff5e6;
   display: flex;
   flex-direction: column;
@@ -164,6 +165,32 @@ header .desc a {
   border-radius: 5px;
   display: flex;
   justify-content: flex-end;
+  gap: 10px;
+}
+
+.edit {
+  display: flex;
+  gap: 10px;
+  position: relative;
+}
+
+.edit:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+  /* right: 2.5rem; */
+}
+
+.dropdown {
+  position: absolute;
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  z-index: -999;
+  padding-right:  20px;
+  right: 1.5rem;
 }
 
 .right a {
@@ -253,4 +280,128 @@ footer hr {
 
 .copyright {
   font-size: 1.1rem;
+}
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: red;
+  }
+  .background-images div {
+    display: none;
+  }
+  header .desc{
+    text-align: center;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  body {
+    background-color: green;
+  }
+  .background-images div {
+    display: none;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  body {
+    background-color: blue;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  body {
+    background-color: aqua;
+  }
+  .background-images div {
+    display: block;
+  }
+  .background-images div:nth-child(1) {
+    left: 12pc;
+  }
+  .background-images div:nth-child(2) {
+    left: 5pc; 
+  }
+  .background-images div:nth-child(3) {
+    display: none;
+  }
+  .background-images div:nth-child(4) {
+    left: 2pc;
+    top: 12pc;
+  }
+  .background-images div:nth-child(5) {
+    right: 2pc;
+    top: 12pc;
+  }
+  .background-images div:nth-child(6) {
+    right: 12pc;
+  }
+  .background-images div:nth-child(7) {
+    display: none;
+  }
+  .background-images div:nth-child(8) {
+    right: 8pc;
+  }
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  body {
+    background-color: beige;
+  }
+  .background-images div:nth-child(1) {
+    position: absolute;
+    top: 4pc;
+    left: 10pc;
+  }
+  
+  .background-images div:nth-child(2) {
+    position: absolute;
+    top: 20pc;
+    left: 10pc;
+  }
+  
+  .background-images div:nth-child(3) {
+    display: block;
+    position: absolute;
+    top: 12pc;
+    left: 18pc;
+  }
+  
+  .background-images div:nth-child(4) {
+    position: absolute;
+    top: 1pc;
+    left: 30pc;
+  }
+  
+  .background-images div:nth-child(5) {
+    position: absolute;
+    right: 28pc;
+    top: 0;
+  }
+  
+  .background-images div:nth-child(6) {
+    position: absolute;
+    top: 4pc;
+    right: 10pc;
+  }
+  
+  .background-images div:nth-child(7) {
+    display: block;
+    position: absolute;
+    top: 12pc;
+    right: 18pc;
+  }
+  
+  .background-images div:nth-child(8) {
+    position: absolute;
+    top: 21pc;
+    right: 10pc;
+  }
 }
