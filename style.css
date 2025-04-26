@@ -1,12 +1,23 @@
+
 * {
   margin: 0;
   padding: 0;
+}
+
+:root {
+  --card-width: 300px;
+  --card-border-radius: 16px;
+  --row-increment: 10px;
+  --card-small: 26;
+  --card-medium: 33;
+  --card-lagre: 45;
 }
 
 @font-face {
   font-family: "playpen";
   src: url("/font/Playpen_Sans/PlaypenSans-VariableFont_wght.ttf");
 }
+
 @font-face {
   font-family: "shantell";
   src: url("/font/Shantell_Sans/ShantellSans-VariableFont_BNCE\,INFM\,SPAC\,wght.ttf");
@@ -64,7 +75,7 @@
 }
 
 header {
-  background-color: #FFF5E6;
+  background-color: #fff5e6;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -101,7 +112,6 @@ header .title {
   border-radius: 100px;
 }
 
-
 header .desc {
   font-family: "shantell";
   font-size: 1.4rem;
@@ -117,8 +127,11 @@ header .desc a {
 
 .to-do-list {
   background-color: #fef5e8;
-  /* background-color: aqua; */
   font-family: "playpen";
+  width: 100%;
+}
+
+.head-container{
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -127,7 +140,7 @@ header .desc a {
 .to-do-list .header {
   display: flex;
   justify-content: space-between;
-  width: 70%;
+  width: 78%;
   position: relative;
 }
 
@@ -147,9 +160,38 @@ header .desc a {
   justify-content: flex-end;
 }
 
-.to-do-list .container {
-  display: grid;
-  align-self: flex-start;
-  height: 80vh;
+.to-do-list .parent {
+  display: flex;
+  justify-content: center;
 }
 
+.to-do-list .container {
+  width: 80%;
+  height: 85vh;
+  margin-top: 50px;
+  overflow: auto;
+}
+
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--card-width));
+  grid-auto-rows: var(--row-increment);
+  justify-content: center;
+}
+
+.card {
+  padding: 0px;
+  margin: 12px;
+  border-radius: var(--card-border-radius);
+  background-color: red;
+}
+
+.card-small {
+  grid-row-end: span var(--card-small);
+}
+.card-medium {
+  grid-row-end: span var(--card-medium);
+}
+.card-large {
+  grid-row-end: span var(--card-lagre);
+}
