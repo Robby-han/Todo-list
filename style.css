@@ -178,7 +178,7 @@ header .desc a {
   opacity: 1;
   visibility: visible;
   z-index: 999;
-  /* right: 2.5rem; */
+  right: 1.5rem;
 }
 
 .dropdown {
@@ -189,20 +189,80 @@ header .desc a {
   visibility: hidden;
   overflow: hidden;
   z-index: -999;
-  padding-right:  20px;
-  right: 1.5rem;
+  right: 0;
+  padding-right: 20px;
+  transition: all 0.3s ease;
 }
 
 .right a {
   margin-left: 10px;
 }
 
+/* start edit container */
+.add-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ded9d1;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.add-container .header {
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.add-container .header input {
+  height: 60px;
+  padding: 0 20px;
+  font-family: "playpen";
+  background-color: #fef5e8;
+  border-radius: 20px;
+  border: 0;
+}
+
+.add-container .header .button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-container .header .button a {
+  background-color: #fef5e8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 50px;
+}
+
+.add-container textarea {
+  height: 70vh;
+  width: 50vh;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  resize: none;
+}
+
+.add-container textarea::placeholder {
+  font-family: "playpen";
+}
+
+
+/* end edit container */
+
 .parent {
   display: flex;
   justify-content: center;
 }
 
-.container {
+.parent .container {
   width: 80%;
   height: 85vh;
   margin-top: 50px;
@@ -282,7 +342,6 @@ footer hr {
   font-size: 1.1rem;
 }
 
-
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   body {
@@ -291,7 +350,7 @@ footer hr {
   .background-images div {
     display: none;
   }
-  header .desc{
+  header .desc {
     text-align: center;
   }
 }
@@ -325,7 +384,7 @@ footer hr {
     left: 12pc;
   }
   .background-images div:nth-child(2) {
-    left: 5pc; 
+    left: 5pc;
   }
   .background-images div:nth-child(3) {
     display: none;
@@ -347,7 +406,6 @@ footer hr {
   .background-images div:nth-child(8) {
     right: 8pc;
   }
-
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -360,45 +418,45 @@ footer hr {
     top: 4pc;
     left: 10pc;
   }
-  
+
   .background-images div:nth-child(2) {
     position: absolute;
     top: 20pc;
     left: 10pc;
   }
-  
+
   .background-images div:nth-child(3) {
     display: block;
     position: absolute;
     top: 12pc;
     left: 18pc;
   }
-  
+
   .background-images div:nth-child(4) {
     position: absolute;
     top: 1pc;
     left: 30pc;
   }
-  
+
   .background-images div:nth-child(5) {
     position: absolute;
     right: 28pc;
     top: 0;
   }
-  
+
   .background-images div:nth-child(6) {
     position: absolute;
     top: 4pc;
     right: 10pc;
   }
-  
+
   .background-images div:nth-child(7) {
     display: block;
     position: absolute;
     top: 12pc;
     right: 18pc;
   }
-  
+
   .background-images div:nth-child(8) {
     position: absolute;
     top: 21pc;
