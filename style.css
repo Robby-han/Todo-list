@@ -74,7 +74,7 @@
 }
 
 header {
-  /* margin-top: 100px; */
+  margin-top: 100px;
   background-color: #fff5e6;
   display: flex;
   flex-direction: column;
@@ -170,8 +170,8 @@ header .desc a {
 
 .edit {
   display: flex;
-  gap: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .edit:hover .dropdown {
@@ -184,7 +184,7 @@ header .desc a {
 .dropdown {
   position: absolute;
   display: flex;
-  gap: 10px;
+  gap: 15px;
   opacity: 0;
   visibility: hidden;
   overflow: hidden;
@@ -207,6 +207,10 @@ header .desc a {
   background-color: #ded9d1;
   padding: 15px;
   border-radius: 15px;
+  opacity: 0;
+  z-index: -999;
+  visibility: hidden;
+  transition: all .3s ease;
 }
 
 .add-container .header {
@@ -222,6 +226,7 @@ header .desc a {
   background-color: #fef5e8;
   border-radius: 20px;
   border: 0;
+  cursor: text;
 }
 
 .add-container .header .button {
@@ -232,6 +237,10 @@ header .desc a {
   gap: 10px;
 }
 
+.add-container .header .button .aggrement {
+  display: flex;
+}
+
 .add-container .header .button a {
   background-color: #fef5e8;
   display: flex;
@@ -239,22 +248,27 @@ header .desc a {
   align-items: center;
   padding: 8px;
   border-radius: 50px;
+  cursor: pointer;
+}
+
+.add-container a:nth-child(1) {
+  margin-right: 10px;
 }
 
 .add-container textarea {
-  height: 70vh;
-  width: 50vh;
   border: none;
   border-radius: 10px;
   outline: none;
   resize: none;
+  font-size: 1.3rem;
+  padding: 5px;
+  height: 70vh;
+  width: 25vw;
 }
 
 .add-container textarea::placeholder {
   font-family: "playpen";
 }
-
-
 /* end edit container */
 
 .parent {
@@ -267,8 +281,8 @@ header .desc a {
   height: 85vh;
   margin-top: 50px;
   overflow: auto;
-  scrollbar-color: #ded9d1 #fef5e8; /* Thumb color and track color */
-  scrollbar-width: thin; /* Thin scrollbar */
+  scrollbar-color: #ded9d1 #fef5e8;
+  scrollbar-width: thin;
 }
 
 .box-container {
@@ -342,6 +356,14 @@ footer hr {
   font-size: 1.1rem;
 }
 
+/* start script class */
+.active {
+  opacity: 1;
+  z-index: 999;
+  visibility: visible;
+}
+/* end script class */
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   body {
@@ -353,6 +375,9 @@ footer hr {
   header .desc {
     text-align: center;
   }
+  .add-container textarea {
+    width: 73vw;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -363,6 +388,9 @@ footer hr {
   .background-images div {
     display: none;
   }
+  .add-container textarea {
+    width: 50vw;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -370,6 +398,10 @@ footer hr {
   body {
     background-color: blue;
   }
+  .add-container textarea {
+    width: 40vw;
+  }
+
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -461,5 +493,8 @@ footer hr {
     position: absolute;
     top: 21pc;
     right: 10pc;
+  }
+  .add-container textarea {
+    width: 30vw;
   }
 }
