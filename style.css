@@ -204,7 +204,7 @@ header .desc a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #ded9d1;
+  background-color: #eb1e4b;
   padding: 15px;
   border-radius: 15px;
   opacity: 0;
@@ -269,7 +269,39 @@ header .desc a {
 .add-container textarea::placeholder {
   font-family: "playpen";
 }
-/* end edit container */
+
+.pallete {
+  position: relative;
+}
+
+.pallete:hover .color {
+  opacity: 1;
+  visibility: visible;
+  z-index: 999;
+  transform: translateX(0px);
+}
+
+.color {
+  position: absolute;
+  background-color: #fef5e8;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  right: 2.5rem;
+  gap: 5px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: -999;
+  transition: all .3s ease-in;
+  transform: translateX(100px);
+}
+
+.background-color {
+  height: 20px;
+  width: 20px;
+}
+
+/* end add container */
 
 .parent {
   display: flex;
@@ -296,7 +328,7 @@ header .desc a {
   padding: 0px;
   margin: 12px;
   border-radius: var(--card-border-radius);
-  background-color: red;
+  background-color: #eb1e4b;
 }
 
 .card-small {
@@ -358,14 +390,8 @@ header .desc a {
   border: none;
 }
 
-.card ul li input[type="checkbox"]:checked::after {
-  content: "";
-  display: block;
-  background-color: white;
-  position: relative;
-  /* width: 100px;
-  height: 1px; */
-  right: 200px;
+.card ul li:has(input[type="checkbox"]:checked) {
+  text-decoration: line-through;
 }
 
 footer {
@@ -422,6 +448,35 @@ footer hr {
   visibility: visible;
 }
 /* end script class */
+
+/* start background color for card */
+.red {
+  background-color: #eb1e4b;
+}
+
+.yellow {
+  background-color: #f5dc50;
+}
+
+.orange {
+  background-color: #f06937;
+}
+.blue {
+  background-color: #69beeb;
+}
+.green {
+  background-color: #2d969b;
+}
+.magenta {
+  background-color: #a5236e;
+}
+.indigo {
+  background-color: #0a509b;
+}
+.brown {
+  background-color: #b95f69;
+}
+/* end background color for card */
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
