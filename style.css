@@ -164,7 +164,7 @@ header .desc a {
   width: 49%;
   border-radius: 5px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
 }
 
@@ -196,6 +196,14 @@ header .desc a {
 
 .right a {
   margin-left: 10px;
+}
+
+
+.del {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -999;
+  cursor: pointer;
 }
 
 /* start edit container */
