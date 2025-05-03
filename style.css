@@ -198,7 +198,6 @@ header .desc a {
   margin-left: 10px;
 }
 
-
 .del {
   opacity: 0;
   visibility: hidden;
@@ -213,6 +212,8 @@ header .desc a {
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #eb1e4b;
+  display: flex;
+  flex-direction: column;
   padding: 15px;
   border-radius: 15px;
   opacity: 0;
@@ -278,6 +279,24 @@ header .desc a {
   font-family: "playpen";
 }
 
+.note-head {
+  display: none;
+  width: 20vw;
+  height: 50px;
+  border: none;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  font-size: 1.3rem;
+  padding-left: 10px;
+  outline: none;
+}
+
+.note-head::placeholder {
+  font-family: "playpen";
+  font-size: 1.3rem;
+}
+
+
 .pallete {
   position: relative;
 }
@@ -300,7 +319,7 @@ header .desc a {
   opacity: 0;
   visibility: hidden;
   z-index: -999;
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
   transform: translateX(100px);
 }
 
@@ -364,6 +383,11 @@ header .desc a {
 
 .header-1 .edit-list {
   cursor: pointer;
+}
+
+.note-header {
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .header-2 {
@@ -454,6 +478,10 @@ footer hr {
   opacity: 1;
   z-index: 999;
   visibility: visible;
+}
+
+.display {
+  display: block;
 }
 /* end script class */
 

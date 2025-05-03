@@ -1,19 +1,27 @@
 const add = document.querySelectorAll(".add");
 const addContainer = document.querySelector(".add-container");
+const note = document.querySelector(".note-head");
 const bColor = document.querySelectorAll(".background-color");
 
 add.forEach((e) => {
   e.addEventListener("click", function () {
     // add class
     addContainer.classList.add("active");
+    if (e.classList.contains("notes")) {
+      note.classList.add("display");
+    }
     // remove class
     const closeButton = document.querySelector(".close");
     closeButton.addEventListener("click", function () {
+      if (e.classList.contains("notes")) {
+        note.classList.remove("display");
+      }
       addContainer.classList.remove("active");
     });
   });
 });
 
+// select card color
 let selectedColor = "";
 bColor.forEach((e) => {
   e.addEventListener("click", function () {
@@ -40,9 +48,13 @@ bColor.forEach((e) => {
 
 const toDo = document.getElementById("toDo");
 const check = document.querySelector(".check");
+// event when user click ok on add list
 check.addEventListener("click", function () {
-  const array = toDo.value.split(/\r?\n/);
+  // notes title
+  const head = document.querySelector(".note-head");
 
+  // splitting list when user click enter
+  const array = toDo.value.split(/\r?\n/);
   const listItem = array.map((item) => {
     const list = document.createElement("li");
     const textList = document.createTextNode(item);
@@ -58,6 +70,7 @@ check.addEventListener("click", function () {
     return `${day}/${month}/${year}`;
   };
 
+  // calculates for get day name( today, tomorrow and yesterday )
   const calculateDate = (offset) => {
     const dateObj = new Date();
     dateObj.setDate(dateObj.getDate() + offset);
@@ -69,12 +82,14 @@ check.addEventListener("click", function () {
   const yesterday = calculateDate(-1);
   const tomorrow = calculateDate(1);
 
+  // change foormate dates (yyyy-mm-dd) to (dd-mm-yyyy)
   let formattedDate = "";
   if (dateInput) {
     const dateParts = dateInput.split("-");
     formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
   }
 
+  // day name
   let dateResult = "";
   if (formattedDate === today) {
     dateResult = "Today";
@@ -84,19 +99,23 @@ check.addEventListener("click", function () {
     dateResult = "Tomorrow";
   }
 
+  // obj for saves list
   const resultObject = {
     date: formattedDate,
     day: dateResult,
+    title: head.value,
     tasks: listItem,
     color: selectedColor,
   };
 
   addList(resultObject);
 
+  // reset addContainer value
   addContainer.addEventListener("transitionend", function () {
     if (!this.classList.contains("active")) {
       document.getElementById("toDo").value = "";
       document.getElementById("date").value = "";
+      document.getElementById("note").value = "";
 
       // Remove any added color classes
       const colors = [
@@ -115,6 +134,7 @@ check.addEventListener("click", function () {
     }
   });
 
+  // edit button
   let currentCard = null;
   document.querySelectorAll(".edit-list").forEach((editBtn) => {
     editBtn.addEventListener("click", function () {
@@ -124,6 +144,8 @@ check.addEventListener("click", function () {
         (li) => li.textContent
       );
       const dateText = currentCard.querySelector(".date").textContent;
+      const titleElement = currentCard.querySelector(".note-header");
+      const titleText = titleElement ? titleElement.textContent : "";
 
       // Set background color
       selectedColor = currentCard.classList[2];
@@ -135,7 +157,10 @@ check.addEventListener("click", function () {
         .split("/")
         .reverse()
         .join("-");
-
+      if (titleText) {
+        document.getElementById("note").value = titleText || "";
+        note.classList.add("display");
+      }
       // Show `add-container`
       addContainer.classList.add("active");
     });
@@ -161,9 +186,10 @@ check.addEventListener("click", function () {
   }
 
   addContainer.classList.remove("active");
+  note.classList.remove("display");
 });
 
-//remove button
+// remove button
 const removeMode = document.querySelectorAll(".remove");
 const trash = document.querySelectorAll(".del");
 let selectionMode = false;
@@ -181,12 +207,14 @@ removeMode.forEach((e) => {
   });
 });
 
+// selection mode
 document.addEventListener("click", function (event) {
   if (selectionMode && event.target.closest(".card")) {
-    event.target.closest(".card").classList.toggle("selected"); // Highlight selection
+    event.target.closest(".card").classList.toggle("selected");
   }
 });
 
+// delete button
 trash.forEach((ev) => {
   ev.addEventListener("click", function () {
     document.querySelectorAll(".card.selected").forEach((card) => {
@@ -200,19 +228,33 @@ trash.forEach((ev) => {
   });
 });
 
+// add card to container
 function addList(items) {
   const list = cards(items);
   const tempDiv = document.createElement("div");
   tempDiv.innerHTML = list;
 
-  const cardBody = document.querySelectorAll(".box-container");
-  cardBody.forEach((e) => {
+  // Choose which container to append to
+  const cardListBody = document.querySelector(".List");
+  const cardNoteBody = document.querySelector(".Note");
+  // const cardNoteBody = document.querySelector(".box-container.Note");
+  if (items.title === "") {
     while (tempDiv.firstChild) {
-      e.appendChild(tempDiv.firstChild);
+      cardListBody.appendChild(tempDiv.firstChild);
     }
-  });
+  } else {
+    while (tempDiv.firstChild) {
+      cardNoteBody.appendChild(tempDiv.firstChild);
+    }
+  }
+  // if (cardBody) {
+  //   while (tempDiv.firstChild) {
+  //     cardBody.appendChild(tempDiv.firstChild);
+  //   }
+  // }
 }
 
+// card items
 function cards(item) {
   const tasksHTML = item.tasks
     .map((task) => `<li>${task}<input type="checkbox" id="checkbox"></li>`)
@@ -225,19 +267,38 @@ function cards(item) {
   } else if (item.tasks.length > 8) {
     size = "card-large";
   }
-  return `<div class="card ${size} ${item.color}">
-                  <div class="header-1">
-                    <h3 class="date">${item.date}</h3>
-                    <a class="edit-list" data-id="${item.date}">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M80 0v-160h800V0H80Zm160-320h56l312-311-29-29-28-28-311 312v56Zm-80 80v-170l448-447q11-11 25.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 31q0 15-5.5 29.5T777-687L330-240H160Zm560-504-56-56 56 56ZM608-631l-29-29-28-28 57 57Z"/></svg>
-                    </a>
-                  </div>
-                  <div class="header-2">
-                    <h1 class="day">${item.day}</h1>
-                  </div>
-                  <ul>
-                    ${tasksHTML}
-                  </ul>
-                </div>
-              </div>`;
+
+  if (item.title == "") {
+    return `<div class="card ${size} ${item.color}">
+                      <div class="header-1">
+                        <h3 class="date">${item.date}</h3>
+                        <a class="edit-list" data-id="${item.date}">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M80 0v-160h800V0H80Zm160-320h56l312-311-29-29-28-28-311 312v56Zm-80 80v-170l448-447q11-11 25.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 31q0 15-5.5 29.5T777-687L330-240H160Zm560-504-56-56 56 56ZM608-631l-29-29-28-28 57 57Z"/></svg>
+                        </a>
+                      </div>
+                      <div class="header-2">
+                        <h1 class="day">${item.day}</h1>
+                      </div>
+                      <ul>
+                        ${tasksHTML}
+                      </ul>
+                    </div>
+                  </div>`;
+  } else {
+    return `<div class="card ${size} ${item.color}">
+                        <div class="header-1">
+                          <h3 class="date">${item.date}</h3>
+                          <a class="edit-list" data-id="${item.date}">
+                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M80 0v-160h800V0H80Zm160-320h56l312-311-29-29-28-28-311 312v56Zm-80 80v-170l448-447q11-11 25.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 31q0 15-5.5 29.5T777-687L330-240H160Zm560-504-56-56 56 56ZM608-631l-29-29-28-28 57 57Z"/></svg>
+                          </a>
+                        </div>
+                        <div class="header-2">
+                          <h1 class="note-header">${item.title}</h1>
+                        </div>
+                        <ul>
+                          ${tasksHTML}
+                        </ul>
+                      </div>
+                    </div>`;
+  }
 }
