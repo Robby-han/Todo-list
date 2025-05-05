@@ -4,17 +4,24 @@ const note = document.querySelector(".note-head");
 const bColor = document.querySelectorAll(".background-color");
 
 document.addEventListener("DOMContentLoaded", function () {
+  // web reset
   let storedCards = JSON.parse(localStorage.getItem("cards")) || [];
 
   // Clear existing cards
   document.querySelector(".List").innerHTML = "";
   document.querySelector(".Note").innerHTML = "";
 
-  // web reset
-  document.addEventListener("DOMContentLoaded", function () {
-    let storedCards = JSON.parse(localStorage.getItem("cards")) || [];
-    storedCards.forEach((card) => addList(card));
+  let historyCards = JSON.parse(localStorage.getItem("history")) || [];
+
+  const historyContainer = document.querySelector(".hist");
+
+  historyCards.forEach((card) => {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = cards(card);
+    historyContainer.appendChild(tempDiv.firstChild);
   });
+
+  storedCards.forEach((card) => addList(card));
 
   // save to local storage
   function saveToLocalStorage(items) {
@@ -233,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // remove button
   const removeMode = document.querySelectorAll(".remove");
   const trash = document.querySelectorAll(".del");
+  const history = document.querySelectorAll(".save-history");
 
   let selectionMode = false;
   removeMode.forEach((e) => {
@@ -245,6 +253,9 @@ document.addEventListener("DOMContentLoaded", function () {
       trash.forEach((trash) => {
         trash.classList.add("active");
       });
+      history.forEach((h) => {
+        h.classList.add("active");
+      });
     });
   });
 
@@ -255,27 +266,73 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // save to history
+  history.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      let storedCards = JSON.parse(localStorage.getItem("cards")) || [];
+      let historyCards = JSON.parse(localStorage.getItem("history")) || [];
+
+      document.querySelectorAll(".card.selected").forEach((card) => {
+        const cardDate = card.querySelector(".date").textContent;
+        const cardObject = storedCards.find((c) => c.date === cardDate);
+
+        if (cardObject) {
+          historyCards.push(cardObject);
+          storedCards = storedCards.filter((c) => c.date !== cardDate);
+
+          // Move card to history container
+          document.querySelector(".hist").appendChild(card);
+          card.classList.remove("selected");
+        }
+      });
+
+      localStorage.setItem("history", JSON.stringify(historyCards));
+      localStorage.setItem("cards", JSON.stringify(storedCards));
+
+      selectionMode = false;
+      document
+        .querySelectorAll(".card")
+        .forEach((card) => card.classList.remove("selectable"));
+      document
+        .querySelectorAll(".save-history, .del")
+        .forEach((btn) => btn.classList.remove("active"));
+    });
+  });
+
   // delete button
   trash.forEach((ev) => {
     ev.addEventListener("click", function () {
       selectionMode = !selectionMode;
       let storedCards = JSON.parse(localStorage.getItem("cards")) || [];
-      const card = document.querySelectorAll(".card");
-      document.querySelectorAll(".card.selected").forEach((card) => {
+      let historyCards = JSON.parse(localStorage.getItem("history")) || [];
+
+      const selectedCards = document.querySelectorAll(".card.selected");
+
+      selectedCards.forEach((card) => {
         const cardDate = card.querySelector(".date").textContent;
-        storedCards = storedCards.filter((c) => c.date !== cardDate);
+
+        if (card.closest(".hist")) {
+          historyCards = historyCards.filter((c) => c.date !== cardDate);
+        } else {
+          storedCards = storedCards.filter((c) => c.date !== cardDate);
+        }
         card.remove();
       });
 
       localStorage.setItem("cards", JSON.stringify(storedCards));
+      localStorage.setItem("history", JSON.stringify(historyCards));
 
       selectionMode = false;
       trash.forEach((e) => {
-        card.forEach((e) => e.classList.remove("selectable"));
+        document
+          .querySelectorAll(".card")
+          .forEach((card) => card.classList.remove("selectable"));
         e.classList.remove("active");
       });
     });
   });
+
+  // delete for history
 
   // add card to container
   function addList(items) {
@@ -303,7 +360,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // card items
   function cards(item) {
     const tasksHTML = item.tasks
-      .map((task) => `<li><p>${task}</p><input type="checkbox" id="checkbox"></li>`)
+      .map(
+        (task) => `<li><p>${task}</p><input type="checkbox" id="checkbox"></li>`
+      )
       .join("");
     let size = "";
     if (item.tasks.length < 6) {

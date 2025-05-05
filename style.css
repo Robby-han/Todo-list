@@ -220,8 +220,11 @@ header .desc a {
   cursor: pointer;
 }
 
-.History {
-  display: flex;
+.save-history {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -999;
+  cursor: pointer;
 }
 
 /* start edit container */
@@ -373,7 +376,6 @@ header .desc a {
   margin: 12px;
   border-radius: var(--card-border-radius);
   background-color: #eb1e4b;
-  /* overflow-y: scroll; */
   overflow: hidden;
 }
 
@@ -405,7 +407,7 @@ header .desc a {
 }
 
 .note-header {
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-weight: 500;
 }
 
