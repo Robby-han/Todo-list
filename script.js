@@ -165,60 +165,70 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // edit button
-    let currentCard = null;
-    document.querySelectorAll(".edit-list").forEach((editBtn) => {
-      editBtn.addEventListener("click", function () {
-        currentCard = this.closest(".card");
-
-        const taskItems = [...currentCard.querySelectorAll("li")].map(
-          (li) => li.textContent
-        );
-        const dateText = currentCard.querySelector(".date").textContent;
-        const titleElement = currentCard.querySelector(".note-header");
-        const titleText = titleElement ? titleElement.textContent : "";
-
-        // Set background color
-        selectedColor = currentCard.classList[2];
-        addContainer.classList.add(selectedColor);
-
-        // Populate input fields
-        document.getElementById("toDo").value = taskItems.join("\n");
-        document.getElementById("date").value = dateText
-          .split("/")
-          .reverse()
-          .join("-");
-        if (titleText) {
-          document.getElementById("note").value = titleText || "";
-          note.classList.add("display");
-        }
-        // Show `add-container`
-        addContainer.classList.add("active");
-      });
-    });
-
-    if (currentCard) {
-      const taskItems = document.getElementById("toDo").value.split(/\r?\n/);
-
-      currentCard.querySelector(".date").textContent = document
-        .getElementById("date")
-        .value.split("-")
-        .reverse()
-        .join("/");
-      currentCard.querySelector(".day").textContent = calculateDate(
-        document.getElementById("date").value
-      );
-      currentCard.querySelector("ul").innerHTML = taskItems
-        .map((task) => `<li>${task}<input type="checkbox"></li>`)
-        .join("");
-      currentCard.className = `card ${selectedColor}`;
-
-      currentCard = null;
-    }
-
     addContainer.classList.remove("active");
     note.classList.remove("display");
   });
+
+  // edit button
+  let currentCard = null;
+  document.addEventListener("click", function (ev) {
+    if (ev.target.classList.contains("edit-list")) {
+      currentCard = ev.target.closest(".card");
+
+      const taskItems = [...currentCard.querySelectorAll("li")].map(
+        (li) => li.textContent
+      );
+      const dateText = currentCard.querySelector(".date").textContent;
+      const titleElement = currentCard.querySelector(".note-header");
+      const titleText = titleElement ? titleElement.textContent : "";
+
+      // Set background color
+      selectedColor = currentCard.classList[2];
+      addContainer.classList.add(selectedColor);
+
+      // Populate input fields
+      document.getElementById("toDo").value = taskItems.join("\n");
+      document.getElementById("date").value = dateText
+        .split("/")
+        .reverse()
+        .join("-");
+      if (titleText) {
+        document.getElementById("note").value = titleText || "";
+        note.classList.add("display");
+      }
+      // Show `add-container`
+      addContainer.classList.add("active");
+
+      const closeButton = document.querySelector(".close");
+      closeButton.addEventListener("click", function () {
+        add.forEach((e) => {
+          if (e.classList.contains("notes")) {
+            note.classList.remove("display");
+          }
+          addContainer.classList.remove("active");
+        });
+      });
+    }
+  });
+  // });
+  if (currentCard) {
+    const taskItems = document.getElementById("toDo").value.split(/\r?\n/);
+
+    currentCard.querySelector(".date").textContent = document
+      .getElementById("date")
+      .value.split("-")
+      .reverse()
+      .join("/");
+    currentCard.querySelector(".day").textContent = calculateDate(
+      document.getElementById("date").value
+    );
+    currentCard.querySelector("ul").innerHTML = taskItems
+      .map((task) => `<li>${task}<input type="checkbox"></li>`)
+      .join("");
+    currentCard.className = `card ${selectedColor}`;
+
+    currentCard = null;
+  }
 
   // remove button
   const removeMode = document.querySelectorAll(".remove");
@@ -293,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // card items
   function cards(item) {
     const tasksHTML = item.tasks
-      .map((task) => `<li>${task}<input type="checkbox" id="checkbox"></li>`)
+      .map((task) => `<li><p>${task}</p><input type="checkbox" id="checkbox"></li>`)
       .join("");
     let size = "";
     if (item.tasks.length < 6) {
@@ -309,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <div class="header-1">
                         <h3 class="date">${item.date}</h3>
                         <a class="edit-list" data-id="${item.date}">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M80 0v-160h800V0H80Zm160-320h56l312-311-29-29-28-28-311 312v56Zm-80 80v-170l448-447q11-11 25.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 31q0 15-5.5 29.5T777-687L330-240H160Zm560-504-56-56 56 56ZM608-631l-29-29-28-28 57 57Z"/></svg>
+                        <img class="edit-list" src="/img/border_color_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png">
                         </a>
                       </div>
                       <div class="header-2">
@@ -325,7 +335,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="header-1">
                           <h3 class="date">${item.date}</h3>
                           <a class="edit-list" data-id="${item.date}">
-                          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="M80 0v-160h800V0H80Zm160-320h56l312-311-29-29-28-28-311 312v56Zm-80 80v-170l448-447q11-11 25.5-17t30.5-6q16 0 31 6t27 18l55 56q12 11 17.5 26t5.5 31q0 15-5.5 29.5T777-687L330-240H160Zm560-504-56-56 56 56ZM608-631l-29-29-28-28 57 57Z"/></svg>
+                          <img class="edit-list" src="/img/border_color_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png">
                           </a>
                         </div>
                         <div class="header-2">

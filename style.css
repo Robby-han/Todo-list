@@ -27,10 +27,10 @@
     rotate: 0deg;
   }
   30% {
-    rotate: -.5deg;
+    rotate: -0.5deg;
   }
   60% {
-    rotate: .5deg;
+    rotate: 0.5deg;
   }
   100% {
     rotate: 0deg;
@@ -291,7 +291,6 @@ header .desc a {
   font-size: 1.3rem;
   padding: 5px;
   height: 60vh;
-  width: 25vw;
 }
 
 .add-container textarea::placeholder {
@@ -374,6 +373,8 @@ header .desc a {
   margin: 12px;
   border-radius: var(--card-border-radius);
   background-color: #eb1e4b;
+  /* overflow-y: scroll; */
+  overflow: hidden;
 }
 
 .card-small {
@@ -553,7 +554,7 @@ footer hr {
     text-align: center;
   }
   .add-container textarea {
-    width: 73vw;
+    width: 50vw;
   }
 }
 
@@ -614,6 +615,9 @@ footer hr {
   .background-images div:nth-child(8) {
     right: 8pc;
   }
+  .add-container textarea {
+    width: 25vw;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -671,6 +675,6 @@ footer hr {
     right: 10pc;
   }
   .add-container textarea {
-    width: 30vw;
+    width: 25vw;
   }
 }
