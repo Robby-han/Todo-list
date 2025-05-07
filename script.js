@@ -1,19 +1,19 @@
-const add = document.querySelectorAll(".add");
-const addContainer = document.querySelector(".add-container");
-const note = document.querySelector(".note-head");
-const bColor = document.querySelectorAll(".background-color");
-
 document.addEventListener("DOMContentLoaded", function () {
+  const add = document.querySelectorAll(".add");
+  const addContainer = document.querySelector(".add-container");
+  const note = document.querySelector(".note-head");
+  const bColor = document.querySelectorAll(".background-color");
   // web reset
   let storedCards = JSON.parse(localStorage.getItem("cards")) || [];
+  let historyCards = JSON.parse(localStorage.getItem("history")) || [];
+  const historyContainer = document.querySelector(".hist");
 
   // Clear existing cards
   document.querySelector(".List").innerHTML = "";
   document.querySelector(".Note").innerHTML = "";
 
-  let historyCards = JSON.parse(localStorage.getItem("history")) || [];
-
-  const historyContainer = document.querySelector(".hist");
+  // Add saved cards
+  // storedCards.forEach((card) => addList(card));
 
   historyCards.forEach((card) => {
     const tempDiv = document.createElement("div");
@@ -273,7 +273,9 @@ document.addEventListener("DOMContentLoaded", function () {
       let historyCards = JSON.parse(localStorage.getItem("history")) || [];
 
       document.querySelectorAll(".card.selected").forEach((card) => {
-        const cardDate = card.querySelector(".date").textContent;
+        const cardDate = card
+          .querySelector(".edit-list")
+          .getAttribute("data-id");
         const cardObject = storedCards.find((c) => c.date === cardDate);
 
         if (cardObject) {
@@ -309,18 +311,19 @@ document.addEventListener("DOMContentLoaded", function () {
       const selectedCards = document.querySelectorAll(".card.selected");
 
       selectedCards.forEach((card) => {
-        const cardDate = card.querySelector(".date").textContent;
+        const cardDate = card
+          .querySelector(".edit-list")
+          .getAttribute("data-id");
 
         if (card.closest(".hist")) {
-          historyCards = historyCards.filter((c) => c.date !== cardDate);
+          historyCards = historyCards.filter((c) => c.id !== cardDate);
+          localStorage.setItem("history", JSON.stringify(historyCards));
         } else {
-          storedCards = storedCards.filter((c) => c.date !== cardDate);
+          storedCards = storedCards.filter((c) => c.id !== cardDate);
+          localStorage.setItem("cards", JSON.stringify(storedCards));
         }
         card.remove();
       });
-
-      localStorage.setItem("cards", JSON.stringify(storedCards));
-      localStorage.setItem("history", JSON.stringify(historyCards));
 
       selectionMode = false;
       trash.forEach((e) => {
@@ -377,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return `<div class="card ${size} ${item.color}">
                       <div class="header-1">
                         <h3 class="date">${item.date}</h3>
-                        <a class="edit-list" data-id="${item.date}">
+                        <a class="edit-list" data-id="${item.id}">
                         <img class="edit-list" src="/img/border_color_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png">
                         </a>
                       </div>
@@ -393,7 +396,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return `<div class="card ${size} ${item.color}">
                         <div class="header-1">
                           <h3 class="date">${item.date}</h3>
-                          <a class="edit-list" data-id="${item.date}">
+                          <a class="edit-list" data-id="${item.id}">
                           <img class="edit-list" src="/img/border_color_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png">
                           </a>
                         </div>
@@ -407,7 +410,4 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>`;
     }
   }
-
-  // Add saved cards
-  storedCards.forEach((card) => addList(card));
 });
