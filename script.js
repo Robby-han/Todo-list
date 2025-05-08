@@ -3,18 +3,36 @@ document.addEventListener("DOMContentLoaded", function () {
   const addContainer = document.querySelector(".add-container");
   const note = document.querySelector(".note-head");
   const bColor = document.querySelectorAll(".background-color");
+  // Choose which container to append to
+  const cardListBody = document.querySelector(".List");
+  const cardNoteBody = document.querySelector(".Note");
+  const historyContainer = document.querySelector(".hist");
+
+  function checkEmptyContainers() {
+    if (cardListBody.children.length === 1) {
+      cardListBody.firstElementChild.classList.add("display-flex");
+    } else {
+      cardListBody.firstElementChild.classList.remove("display-flex");
+    }
+
+    if (cardNoteBody.children.length === 1) {
+      cardNoteBody.firstElementChild.classList.add("display-flex");
+    } else {
+      cardNoteBody.firstElementChild.classList.remove("display-flex");
+    }
+
+    if (historyContainer.children.length === 1) {
+      historyContainer.firstElementChild.classList.add("display-flex");
+    } else {
+      historyContainer.firstElementChild.classList.remove("display-flex");
+    }
+  }
+
   // web reset
   let storedCards = JSON.parse(localStorage.getItem("cards")) || [];
   let historyCards = JSON.parse(localStorage.getItem("history")) || [];
-  const historyContainer = document.querySelector(".hist");
 
-  // Clear existing cards
-  document.querySelector(".List").innerHTML = "";
-  document.querySelector(".Note").innerHTML = "";
-
-  // Add saved cards
-  // storedCards.forEach((card) => addList(card));
-
+  // history card
   historyCards.forEach((card) => {
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = cards(card);
@@ -22,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   storedCards.forEach((card) => addList(card));
+  checkEmptyContainers();
 
   // save to local storage
   function saveToLocalStorage(items) {
@@ -273,14 +292,12 @@ document.addEventListener("DOMContentLoaded", function () {
       let historyCards = JSON.parse(localStorage.getItem("history")) || [];
 
       document.querySelectorAll(".card.selected").forEach((card) => {
-        const cardDate = card
-          .querySelector(".edit-list")
-          .getAttribute("data-id");
-        const cardObject = storedCards.find((c) => c.date === cardDate);
+        const cardID = card.querySelector(".edit-list").getAttribute("data-id");
+        const cardObject = storedCards.find((c) => c.id === cardID);
 
         if (cardObject) {
           historyCards.push(cardObject);
-          storedCards = storedCards.filter((c) => c.date !== cardDate);
+          storedCards = storedCards.filter((c) => c.id !== cardID);
 
           // Move card to history container
           document.querySelector(".hist").appendChild(card);
@@ -291,6 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("history", JSON.stringify(historyCards));
       localStorage.setItem("cards", JSON.stringify(storedCards));
 
+      checkEmptyContainers();
       selectionMode = false;
       document
         .querySelectorAll(".card")
@@ -311,22 +329,20 @@ document.addEventListener("DOMContentLoaded", function () {
       const selectedCards = document.querySelectorAll(".card.selected");
 
       selectedCards.forEach((card) => {
-        const cardDate = card
-          .querySelector(".edit-list")
-          .getAttribute("data-id");
+        const cardID = card.querySelector(".edit-list").getAttribute("data-id");
 
         if (card.closest(".hist")) {
-          historyCards = historyCards.filter((c) => c.id !== cardDate);
+          historyCards = historyCards.filter((c) => c.id !== cardID);
           localStorage.setItem("history", JSON.stringify(historyCards));
         } else {
-          storedCards = storedCards.filter((c) => c.id !== cardDate);
+          storedCards = storedCards.filter((c) => c.id !== cardID);
           localStorage.setItem("cards", JSON.stringify(storedCards));
         }
         card.remove();
       });
-
+      checkEmptyContainers();
       selectionMode = false;
-      trash.forEach((e) => {
+      document.querySelectorAll(".save-history, .del").forEach((e) => {
         document
           .querySelectorAll(".card")
           .forEach((card) => card.classList.remove("selectable"));
@@ -335,17 +351,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // delete for history
-
   // add card to container
   function addList(items) {
     const list = cards(items);
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = list;
 
-    // Choose which container to append to
-    const cardListBody = document.querySelector(".List");
-    const cardNoteBody = document.querySelector(".Note");
     // const cardNoteBody = document.querySelector(".box-container.Note");
     if (items.title === "") {
       while (tempDiv.firstChild) {
@@ -358,7 +369,35 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     // save card to local storage
     saveToLocalStorage(items);
+    checkEmptyContainers();
   }
+
+  // category select
+  const AllCategory = document.querySelector(".ALL");
+  const noteCategory = document.querySelector(".NOTE");
+  const listCategory = document.querySelector(".TODO");
+
+  noteCategory.addEventListener("click", function () {
+    document
+      .querySelectorAll(".LIST")
+      .forEach((e) => (e.style.display = "none"));
+    document
+      .querySelectorAll(".NOTES")
+      .forEach((e) => (e.style.display = "block"));
+  });
+  listCategory.addEventListener("click", function () {
+    document
+      .querySelectorAll(".NOTES")
+      .forEach((e) => (e.style.display = "none"));
+    document
+      .querySelectorAll(".LIST")
+      .forEach((e) => (e.style.display = "block"));
+  });
+  AllCategory.addEventListener("click", function () {
+    document
+      .querySelectorAll(".card")
+      .forEach((e) => (e.style.display = "block"));
+  });
 
   // card items
   function cards(item) {
@@ -377,7 +416,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (item.title == "") {
-      return `<div class="card ${size} ${item.color}">
+      return `<div class="card ${size} ${item.color} LIST">
                       <div class="header-1">
                         <h3 class="date">${item.date}</h3>
                         <a class="edit-list" data-id="${item.id}">
@@ -393,7 +432,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                   </div>`;
     } else {
-      return `<div class="card ${size} ${item.color}">
+      return `<div class="card ${size} ${item.color} NOTES">
                         <div class="header-1">
                           <h3 class="date">${item.date}</h3>
                           <a class="edit-list" data-id="${item.id}">

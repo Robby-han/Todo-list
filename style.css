@@ -89,7 +89,6 @@
 }
 
 header {
-  margin-top: 100px;
   background-color: #fff5e6;
   display: flex;
   flex-direction: column;
@@ -196,6 +195,32 @@ header .desc a {
   right: 1.5rem;
 }
 
+.empty {
+  position: absolute;
+  /* left: 0; */
+  right: 0;
+  top: 20vh;
+  width: 80vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.emoji {
+  width: 220px;
+}
+
+.label {
+  font-size: 2.3rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+.label b {
+  font-weight: 500;
+}
+
 .dropdown {
   position: absolute;
   display: flex;
@@ -207,6 +232,55 @@ header .desc a {
   right: 0;
   padding-right: 20px;
   transition: all 0.3s ease;
+}
+
+.category {
+  position: relative;
+  cursor: pointer;
+}
+
+.drop {
+  position: absolute;
+  display: block;
+  gap: 15px;
+  list-style-type: none;
+  background-color: white;
+  width: max-content;
+  right: -10px;
+  top: 35px;
+  border-radius: 12px;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  z-index: -999;
+  cursor: pointer;
+  transform: translateY(-50px);
+  transition: all 0.3s ease;
+}
+
+.drop li:nth-child(1) {
+  border-radius: 12px 12px 0 0;
+}
+
+.drop li:nth-child(2) {
+  border-radius: 0;
+}
+
+.drop li {
+  border-radius: 0 0 12px 12px;
+  padding: 5px 30px 5px 15px;
+}
+
+.category:hover .drop {
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
+  overflow: visible;
+  z-index: 999;
+}
+
+.drop :hover {
+  background-color: #ded9d1;
 }
 
 .right a {
@@ -369,6 +443,7 @@ header .desc a {
   grid-template-columns: repeat(auto-fill, var(--card-width));
   grid-auto-rows: var(--row-increment);
   justify-content: center;
+  position: relative;
 }
 
 .card {
@@ -513,6 +588,10 @@ footer hr {
 .display {
   display: block;
 }
+
+.display-flex{
+  display: flex;
+}
 /* end script class */
 
 /* start background color for card */
@@ -546,9 +625,6 @@ footer hr {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  body {
-    background-color: red;
-  }
   .background-images div {
     display: none;
   }
@@ -559,9 +635,6 @@ footer hr {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  body {
-    background-color: green;
-  }
   .background-images div {
     display: none;
   }
@@ -572,9 +645,6 @@ footer hr {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  body {
-    background-color: blue;
-  }
   .add-container textarea {
     width: 40vw;
   }
@@ -582,9 +652,6 @@ footer hr {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  body {
-    background-color: aqua;
-  }
   .background-images div {
     display: block;
   }
@@ -621,9 +688,6 @@ footer hr {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  body {
-    background-color: beige;
-  }
   .background-images div:nth-child(1) {
     position: absolute;
     top: 4pc;
