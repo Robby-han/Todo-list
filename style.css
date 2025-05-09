@@ -47,25 +47,25 @@
 
 .fade-in {
   transform: translateY(-300px);
-  opacity: 0; 
+  opacity: 0;
   animation: fadeIn 1s ease forwards;
 }
 
 .fade-in-y {
   transform: translateY(200px);
-  opacity: 0; 
+  opacity: 0;
   animation: fadeIn 1s ease forwards;
 }
 
 .fade-in-min-x {
   transform: translatex(-300px);
-  opacity: 0; 
+  opacity: 0;
   animation: fadeIn 1s ease forwards;
 }
 
 .fade-in-x {
   transform: translatex(200px);
-  opacity: 0; 
+  opacity: 0;
   animation: fadeIn 1s ease forwards;
 }
 /* end animation */
@@ -150,15 +150,6 @@ header .title {
   font-weight: 400;
 }
 
-.button span {
-  content: "";
-  display: block;
-  background-color: black;
-  height: 8px;
-  width: 8px;
-  border-radius: 100px;
-}
-
 header .desc {
   font-family: "shantell";
   font-size: 1.4rem;
@@ -215,10 +206,41 @@ header .desc a {
   gap: 10px;
 }
 
+.right a {
+  margin-left: 10px;
+}
+
+.del {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -999;
+  cursor: pointer;
+}
+
+.save-history {
+  opacity: 0;
+  visibility: hidden;
+  z-index: -999;
+  cursor: pointer;
+}
+
 .edit {
   display: flex;
   position: relative;
   cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  display: flex;
+  gap: 15px;
+  opacity: 0;
+  visibility: hidden;
+  overflow: hidden;
+  z-index: -999;
+  right: 0;
+  padding-right: 20px;
+  transition: all 0.3s ease;
 }
 
 .edit:hover .dropdown {
@@ -226,6 +248,32 @@ header .desc a {
   visibility: visible;
   z-index: 999;
   right: 1.5rem;
+}
+
+.remove {
+  cursor: pointer;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+}
+
+.parent .container {
+  width: 80%;
+  height: 85vh;
+  margin-top: 50px;
+  overflow: auto;
+  scrollbar-color: #ded9d1 #fef5e8;
+  scrollbar-width: thin;
+}
+
+.box-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--card-width));
+  grid-auto-rows: var(--row-increment);
+  justify-content: center;
+  position: relative;
 }
 
 .empty {
@@ -254,22 +302,17 @@ header .desc a {
   font-weight: 500;
 }
 
-.dropdown {
-  position: absolute;
-  display: flex;
-  gap: 15px;
-  opacity: 0;
-  visibility: hidden;
-  overflow: hidden;
-  z-index: -999;
-  right: 0;
-  padding-right: 20px;
-  transition: all 0.3s ease;
-}
-
 .category {
   position: relative;
   cursor: pointer;
+}
+
+.category:hover .drop {
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
+  overflow: visible;
+  z-index: 999;
 }
 
 .drop {
@@ -304,34 +347,8 @@ header .desc a {
   padding: 5px 30px 5px 15px;
 }
 
-.category:hover .drop {
-  transform: translateY(0px);
-  opacity: 1;
-  visibility: visible;
-  overflow: visible;
-  z-index: 999;
-}
-
 .drop :hover {
   background-color: #ded9d1;
-}
-
-.right a {
-  margin-left: 10px;
-}
-
-.del {
-  opacity: 0;
-  visibility: hidden;
-  z-index: -999;
-  cursor: pointer;
-}
-
-.save-history {
-  opacity: 0;
-  visibility: hidden;
-  z-index: -999;
-  cursor: pointer;
 }
 
 /* start edit container */
@@ -457,28 +474,7 @@ header .desc a {
 
 /* end add container */
 
-.parent {
-  display: flex;
-  justify-content: center;
-}
-
-.parent .container {
-  width: 80%;
-  height: 85vh;
-  margin-top: 50px;
-  overflow: auto;
-  scrollbar-color: #ded9d1 #fef5e8;
-  scrollbar-width: thin;
-}
-
-.box-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, var(--card-width));
-  grid-auto-rows: var(--row-increment);
-  justify-content: center;
-  position: relative;
-}
-
+/* start card style */
 .card {
   padding: 0px;
   margin: 12px;
@@ -554,7 +550,9 @@ header .desc a {
 .card ul li:has(input[type="checkbox"]:checked) {
   text-decoration: line-through;
 }
+/* end card style */
 
+/* start footer style */
 footer {
   background-color: #fef5e8;
   padding-top: 100px;
@@ -601,6 +599,7 @@ footer hr {
 .copyright {
   font-size: 1.1rem;
 }
+/* end footer style */
 
 /* start script class */
 .selectable {
