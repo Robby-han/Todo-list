@@ -22,6 +22,7 @@
   src: url("/font/Shantell_Sans/ShantellSans-VariableFont_BNCE\,INFM\,SPAC\,wght.ttf");
 }
 
+/* start animation */
 @keyframes select {
   0% {
     rotate: 0deg;
@@ -36,6 +37,38 @@
     rotate: 0deg;
   }
 }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translatex(0px);
+  }
+}
+
+.fade-in {
+  transform: translateY(-300px);
+  opacity: 0; 
+  animation: fadeIn 1s ease forwards;
+}
+
+.fade-in-y {
+  transform: translateY(200px);
+  opacity: 0; 
+  animation: fadeIn 1s ease forwards;
+}
+
+.fade-in-min-x {
+  transform: translatex(-300px);
+  opacity: 0; 
+  animation: fadeIn 1s ease forwards;
+}
+
+.fade-in-x {
+  transform: translatex(200px);
+  opacity: 0; 
+  animation: fadeIn 1s ease forwards;
+}
+/* end animation */
 
 .background-images {
   position: relative;
@@ -589,7 +622,7 @@ footer hr {
   display: block;
 }
 
-.display-flex{
+.display-flex {
   display: flex;
 }
 /* end script class */

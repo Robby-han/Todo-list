@@ -8,25 +8,41 @@ document.addEventListener("DOMContentLoaded", function () {
   const cardNoteBody = document.querySelector(".Note");
   const historyContainer = document.querySelector(".hist");
 
-  function checkEmptyContainers() {
-    if (cardListBody.children.length === 1) {
-      cardListBody.firstElementChild.classList.add("display-flex");
-    } else {
-      cardListBody.firstElementChild.classList.remove("display-flex");
-    }
+  // smoth scroll
+  $(document).ready(function () {
+    $("a").on("click", function (event) {
+      if (this.hash !== "") {
+        event.preventDefault();
+        const hash = this.hash;
 
-    if (cardNoteBody.children.length === 1) {
-      cardNoteBody.firstElementChild.classList.add("display-flex");
-    } else {
-      cardNoteBody.firstElementChild.classList.remove("display-flex");
-    }
+        $("html, body").animate(
+          {
+            scrollTop: $(hash).offset().top,
+          },
+          800,
+          function () {
+            window.location.hash = hash;
+          }
+        );
+        }
+    });
+  });
 
-    if (historyContainer.children.length === 1) {
-      historyContainer.firstElementChild.classList.add("display-flex");
-    } else {
-      historyContainer.firstElementChild.classList.remove("display-flex");
-    }
-  }
+  // fade animation
+  const backgroundImage = document.querySelector(".background-images");
+  const title = document.querySelector(".title");
+  backgroundImage.classList.add("fade-in");
+  title.classList.add("fade-in-y");
+  title.nextElementSibling.classList.add("fade-in-x");
+  title.nextElementSibling.nextElementSibling.classList.add("fade-in-min-x");
+  setInterval(() => {
+    backgroundImage.classList.remove("fade-in");
+    title.classList.remove("fade-in-y");
+    title.nextElementSibling.classList.remove("fade-in-x");
+    title.nextElementSibling.nextElementSibling.classList.remove(
+      "fade-in-min-x"
+    );
+  }, 2000);
 
   // web reset
   let storedCards = JSON.parse(localStorage.getItem("cards")) || [];
@@ -398,6 +414,27 @@ document.addEventListener("DOMContentLoaded", function () {
       .querySelectorAll(".card")
       .forEach((e) => (e.style.display = "block"));
   });
+
+  // message appear
+  function checkEmptyContainers() {
+    if (cardListBody.children.length === 1) {
+      cardListBody.firstElementChild.classList.add("display-flex");
+    } else {
+      cardListBody.firstElementChild.classList.remove("display-flex");
+    }
+
+    if (cardNoteBody.children.length === 1) {
+      cardNoteBody.firstElementChild.classList.add("display-flex");
+    } else {
+      cardNoteBody.firstElementChild.classList.remove("display-flex");
+    }
+
+    if (historyContainer.children.length === 1) {
+      historyContainer.firstElementChild.classList.add("display-flex");
+    } else {
+      historyContainer.firstElementChild.classList.remove("display-flex");
+    }
+  }
 
   // card items
   function cards(item) {

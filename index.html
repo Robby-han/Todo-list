@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <div class="background-images">
@@ -270,11 +275,9 @@
     <header>
       <h1 class="title">ToDo.</h1>
       <div class="button">
-        <a href="">To do list</a>
-        <span></span>
-        <a href="">Diary</a>
-        <span></span>
-        <a href="">Notes</a>
+        <a href="#to-do">To do list</a>
+        <a><b>&</b></a>
+        <a href="#note">Notes</a>
       </div>
       <p class="desc">
         A Website for you who need something <a href="">ToDo.</a>
@@ -282,7 +285,7 @@
     </header>
 
     <main>
-      <section class="to-do-list">
+      <section class="to-do-list" id="to-do">
         <div class="head-container">
           <div class="header">
             <div class="left">
@@ -373,7 +376,7 @@
         </div>
       </section>
 
-      <section class="note">
+      <section class="note" id="note">
         <div class="head-container">
           <div class="header">
             <div class="left">
@@ -527,7 +530,7 @@
             <div class="box-container hist">
               <div class="empty">
                 <img class="emoji" src="/img/yawning-face_1f971.png" />
-                <p class="label">You Are Not <b>ToDo.</b> Anything</p>
+                <p class="label">You Are Not Saving Any <b>ToDo.</b></p>
               </div>
             </div>
           </div>
