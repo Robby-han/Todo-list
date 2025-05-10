@@ -455,7 +455,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <div class="header-1">
                         <h3 class="date">${item.date}</h3>
                         <a class="edit-list" data-id="${item.id}">
-                        <img class="edit-list" src="/img/border_color_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png">
+                        <img class="edit-list" src="./img/border_color_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png">
                         </a>
                       </div>
                       <div class="header-2">
@@ -471,7 +471,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="header-1">
                           <h3 class="date">${item.date}</h3>
                           <a class="edit-list" data-id="${item.id}">
-                          <img class="edit-list" src="/img/border_color_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png">
+                          <img class="edit-list" src="./img/border_color_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.png">
                           </a>
                         </div>
                         <div class="header-2">
