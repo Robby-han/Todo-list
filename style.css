@@ -1,8 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-
 :root {
   --card-width: 300px;
   --card-border-radius: 16px;
@@ -14,12 +9,21 @@
 
 @font-face {
   font-family: "playpen";
-  src: url("/font/Playpen_Sans/PlaypenSans-VariableFont_wght.ttf");
+  src: url("./font/Playpen_Sans/PlaypenSans-VariableFont_wght.ttf");
 }
 
 @font-face {
   font-family: "shantell";
-  src: url("/font/Shantell_Sans/ShantellSans-VariableFont_BNCE\,INFM\,SPAC\,wght.ttf");
+  src: url("./font/Shantell_Sans/ShantellSans-VariableFont_BNCE\,INFM\,SPAC\,wght.ttf");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #fff5e6 ;
 }
 
 /* start animation */
@@ -131,7 +135,7 @@ header {
 }
 
 header .title {
-  font-family: "playpen";
+  font-family: "playpen", sans-serif;
   font-size: 7rem;
   font-weight: 400;
 }
@@ -143,7 +147,7 @@ header .title {
 }
 
 .button a {
-  font-family: "playpen";
+  font-family: "playpen", sans-serif;
   text-decoration: none;
   color: #000000;
   font-size: 1.2rem;
@@ -151,13 +155,13 @@ header .title {
 }
 
 header .desc {
-  font-family: "shantell";
+  font-family: "shantell", sans-serif;
   font-size: 1.4rem;
   margin-top: 15px;
 }
 
 header .desc a {
-  font-family: "playpen";
+  font-family: "playpen", sans-serif;
   color: #000000;
   text-decoration: none;
   font-weight: 600;
@@ -167,7 +171,7 @@ header .desc a {
 .note,
 .history {
   background-color: #fef5e8;
-  font-family: "playpen";
+  font-family: "playpen", sans-serif;
   width: 100%;
 }
 
