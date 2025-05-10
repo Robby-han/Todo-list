@@ -1,3 +1,17 @@
+// fade animation
+const backgroundImage = document.querySelector(".background-images");
+const title = document.querySelector(".title");
+backgroundImage.classList.add("fade-in");
+title.classList.add("fade-in-y");
+title.nextElementSibling.classList.add("fade-in-x");
+title.nextElementSibling.nextElementSibling.classList.add("fade-in-min-x");
+setInterval(() => {
+  backgroundImage.classList.remove("fade-in");
+  title.classList.remove("fade-in-y");
+  title.nextElementSibling.classList.remove("fade-in-x");
+  title.nextElementSibling.nextElementSibling.classList.remove("fade-in-min-x");
+}, 2000);
+
 document.addEventListener("DOMContentLoaded", function () {
   const add = document.querySelectorAll(".add");
   const addContainer = document.querySelector(".add-container");
@@ -24,25 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.hash = hash;
           }
         );
-        }
+      }
     });
   });
-
-  // fade animation
-  const backgroundImage = document.querySelector(".background-images");
-  const title = document.querySelector(".title");
-  backgroundImage.classList.add("fade-in");
-  title.classList.add("fade-in-y");
-  title.nextElementSibling.classList.add("fade-in-x");
-  title.nextElementSibling.nextElementSibling.classList.add("fade-in-min-x");
-  setInterval(() => {
-    backgroundImage.classList.remove("fade-in");
-    title.classList.remove("fade-in-y");
-    title.nextElementSibling.classList.remove("fade-in-x");
-    title.nextElementSibling.nextElementSibling.classList.remove(
-      "fade-in-min-x"
-    );
-  }, 2000);
 
   // web reset
   let storedCards = JSON.parse(localStorage.getItem("cards")) || [];
